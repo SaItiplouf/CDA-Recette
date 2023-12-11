@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/CDA_Recette/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/CDA_Recette/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/CDA_Recette/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/CDA_Recette/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/CDA_Recette/tests" isTestSource="true" packagePrefix="Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/CDA_Recette/tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/CDA_Recette/tests/Unit" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/CDA_Recette/vendor/darkaonline/l5-swagger" />
+      <excludeFolder url="file://$MODULE_DIR$/CDA_Recette/vendor/doctrine/annotations" />
+      <excludeFolder url="file://$MODULE_DIR$/CDA_Recette/vendor/swagger-api/swagger-ui" />
+      <excludeFolder url="file://$MODULE_DIR$/CDA_Recette/vendor/zircote/swagger-php" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -1,0 +1,277 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Recettes",
+        "description": "Documentation de l'API de recettes",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/recipes": {
+            "get": {
+                "tags": [
+                    "Recettes"
+                ],
+                "summary": "Récupérer la liste des recettes",
+                "description": "Retourne la liste des recettes avec les ingrédients",
+                "operationId": "getRecettesList",
+                "responses": {
+                    "200": {
+                        "description": "Opération réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Recipe"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Mauvaise requête"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Recettes"
+                ],
+                "summary": "Créer une nouvelle recette",
+                "description": "Crée une nouvelle recette avec les détails fournis",
+                "operationId": "createRecipe",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "preparationTime",
+                                    "cookingTime",
+                                    "serves"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Poulet rôti"
+                                    },
+                                    "preparationTime": {
+                                        "type": "string",
+                                        "example": "20 minutes"
+                                    },
+                                    "cookingTime": {
+                                        "type": "string",
+                                        "example": "1 heure"
+                                    },
+                                    "serves": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": 4
+                                    },
+                                    "ingredients": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "name"
+                                            ],
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Choux-fleur"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Recette créée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Recipe"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Mauvaise requête"
+                    }
+                }
+            }
+        },
+        "/api/recipes/{id}": {
+            "get": {
+                "tags": [
+                    "Recettes"
+                ],
+                "summary": "Récupérer une recette par ID",
+                "description": "Retourne une recette avec les ingrédients associés par ID",
+                "operationId": "getRecipeById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la recette",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Opération réussie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Recipe"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recette non trouvée"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Recettes"
+                ],
+                "summary": "Mettre à jour une recette par ID",
+                "description": "Met à jour une recette avec les détails fournis par ID",
+                "operationId": "updateRecipe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la recette",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Recipe"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Recette mise à jour avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Recipe"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Recette non trouvée"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Recettes"
+                ],
+                "summary": "Supprimer une recette par ID",
+                "description": "Supprime une recette par ID",
+                "operationId": "deleteRecipe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la recette",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Recette supprimée avec succès"
+                    },
+                    "404": {
+                        "description": "Recette non trouvée"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Ingredient": {
+                "title": "Ingredient",
+                "description": "Ingredient model",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "The name of the ingredient",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Recipe": {
+                "title": "Recipe",
+                "description": "Recipe model",
+                "required": [
+                    "name",
+                    "preparationTime",
+                    "cookingTime",
+                    "serves"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "The unique identifier for the recipe",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "name": {
+                        "description": "The name of the recipe",
+                        "type": "string"
+                    },
+                    "preparationTime": {
+                        "description": "The preparation time of the recipe in minutes",
+                        "type": "string"
+                    },
+                    "cookingTime": {
+                        "description": "The cooking time of the recipe in minutes",
+                        "type": "string"
+                    },
+                    "serves": {
+                        "description": "The number of servings the recipe yields",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "ingredients": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Ingredient"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+created:
+    - database/factories/IngredientFactory.php
+    - database/factories/RecipeFactory.php
+    - database/migrations/2023_11_20_160336_create_ingredients_table.php
+    - database/migrations/2023_11_20_160337_create_recipes_table.php
+    - app/Models/Ingredient.php
+    - app/Models/Recipe.php
+models:
+    Ingredient: { id: 'id foreign:recipes.ingredients_id', name: string }
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
+    Recipe: { id: id, name: string, preparationTime: string, cookingTime: string, serves: integer, ingredients_id: bigInteger }
+    Relation: { id: false, recipe_id: 'bigInteger foreign:recipes.id', ingredient_id: 'bigInteger foreign:ingredients.id' }

@@ -1,0 +1,11 @@
+models:
+  Ingredient:
+    id: id foreign:recipes.ingredients_id
+    name: string
+  Recipe:
+    id: id
+    name: string
+    preparationTime: string
+    cookingTime: string
+    serves: integer
+    ingredients_id: bigInteger
