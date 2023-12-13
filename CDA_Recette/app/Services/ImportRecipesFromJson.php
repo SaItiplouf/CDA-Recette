@@ -2,25 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Ingredient;
-use App\Models\Recipe;
 
-class ImportRecipesFromJson
+class ImportRecipesFromJson extends ImporterFromFile
 {
-    public function import($filePath)
+    public function import($filename) : void
     {
-        $data = json_decode(file_get_contents($filePath), true);
-
-        foreach ($data['recipes'] as $recipeData) {
-            $recipe = new Recipe();
-            $recipe->fill($recipeData);
-            $recipe->save();
-
-            foreach ($recipeData['ingredients'] as $ingredientName) {
-                $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
-
-                $recipe->ingredients()->attach($ingredient->id);
-            }
-        }
+        $data = json_decode($this->getFileData($filename), true);
+        $this->pushToDb($data);
     }
 }
+
