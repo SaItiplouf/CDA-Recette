@@ -2,23 +2,23 @@
 
 namespace App\Providers;
 
-use App\Services\ImportFileFactory;
-use App\Services\ImportRecipesFromCsv;
-use App\Services\ImportRecipesFromJson;
+use App\Repositories\RecipesRepository;
+use App\Services\Importer\ImporterPersistanceMysql;
+use App\Services\Importer\ImportRecipesFromJson;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
 
 class ImportServiceProvider extends ServiceProvider
 {
+
+
     /**
      * Register services.
      */
     public function register()
     {
-        $this->app->singleton(ImportFileFactory::class, function ($app) {
-            return new ImportFileFactory([
-                'csv' => ImportRecipesFromCsv::class,
-                'json' => ImportRecipesFromJson::class,
-            ]);
+        $this->app->singleton(ImporterPersistanceMysql::class, function ($app) {
+            return new ImporterPersistanceMysql();
         });
     }
 

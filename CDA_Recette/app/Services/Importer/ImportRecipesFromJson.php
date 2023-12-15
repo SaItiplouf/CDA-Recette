@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Importer;
 
-
-class ImportRecipesFromJson extends ImporterFromFile
+class ImportRecipesFromJson extends ImporterClass
 {
     public function import($filename) : void
     {

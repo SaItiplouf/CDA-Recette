@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Importer;
 
-use App\Models\Ingredient;
-use App\Models\Recipe;
-use Mockery\Exception;
 
-class ImportRecipesFromCsv extends ImporterFromFile
+class ImportRecipesFromCsv extends ImporterClass
 {
     public function import($filename): void
     {

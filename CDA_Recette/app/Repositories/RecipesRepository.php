@@ -5,15 +5,23 @@ namespace App\Repositories;
 use App\Http\Controllers\Controller;
 use App\Models\Ingredient;
 use App\Models\Recipe;
+use App\Services\Importer\ImporterPersistanceMysql;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RecipesRepository extends Controller {
 
-    public function __construct(private Request $request) {
+    public function __construct(private Request $request)
+    {
+    }
+    public function persist($recipeData): void {
+
+        $recipe = Recipe::create($recipeData);
+
+        $importerPersistance = app(ImporterPersistanceMysql::class);
+        $importerPersistance->importData($recipe);
 
     }
-
     public function getCollection(): JsonResponse {
 
         $recipes = Recipe::with('ingredients')->get();
@@ -95,4 +103,6 @@ class RecipesRepository extends Controller {
 
         return response()->json(['message' => 'Recette supprimée avec succès'], 200);
     }
+
+
 }
